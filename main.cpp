@@ -14,6 +14,7 @@ struct nod
 class Stiva
 {
     private:
+        int b;
         nod*prim;
 
     public:
@@ -114,18 +115,23 @@ nod* Stiva::extrageNod(nod*&p)
 
     return NULL;
 }
-
+void Stiva::conversieBaza10()
+{
+    int nr=0,putereB=1;
+    nod*p=extrageNod(p);
+    do
+    {
+        nr=nr+p->info*putereB;
+        putereB=putereB*b;
+        //de continuat
+    }
+}
 int main()
 {
     Stiva a;
     nod*p;
     a.creareStiva();
     a.afisareStiva();
-    p=a.extrageNod(p);
-    if(p!=NULL)
-    fout<<p->info<<'\n';
-    else
-        fout<<"Nod NULL"<<'\n';
-    a.afisareStiva();
+    a.conversieBaza10();
     return 0;
 }
