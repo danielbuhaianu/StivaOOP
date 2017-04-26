@@ -14,13 +14,14 @@ struct nod
 class Stiva
 {
     private:
-        int b;
         nod*prim;
 
     public:
+        int baza;
         Stiva()
         {
             prim=NULL;
+            baza=1;
         }
         Stiva(Stiva&a);
         ~Stiva();
@@ -85,8 +86,8 @@ void Stiva::adaugaNod(int info)
 }
 void Stiva::creareStiva()
 {
-    int b,cif;
-    fin>>b;
+    int cif;
+    fin>>baza;
     while(fin>>cif)
         adaugaNod(cif);
 }
@@ -117,14 +118,24 @@ nod* Stiva::extrageNod(nod*&p)
 }
 void Stiva::conversieBaza10()
 {
-    int nr=0,putereB=1;
+    int nr=0,putereB=1,cif;
     nod*p=extrageNod(p);
-    do
+    while(p!=NULL)
     {
-        nr=nr+p->info*putereB;
-        putereB=putereB*b;
-        //de continuat
+        cif=p->info;
+        nr+=cif*putereB;
+        putereB=putereB*baza;
+        p=extrageNod(p);
     }
+    int v[10],nr2=0;
+    while(nr!=0)
+    {
+        v[++nr2]=nr%10;
+        nr/=10;
+    }
+    for(int i=nr2;i>=1;i--)
+        adaugaNod(v[i]);
+    baza=10;
 }
 int main()
 {
