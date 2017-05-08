@@ -29,7 +29,7 @@ class Stiva
         nod* extrageNod(nod*&p);
         void adaugaNod(int info);
         void conversieBaza10();
-        void conversieBazaB(int );
+        void conversieBazaB(int b );
         Stiva operator+(Stiva&a);
         Stiva operator-(Stiva&a);
         Stiva operator*(int cifra);
@@ -148,6 +148,29 @@ Stiva Stiva::operator+(Stiva&b)
     int baza_calcul = b.baza;
     conversieBaza10();
     b.conversieBaza10();
+
+}
+void Stiva::conversieBazaB(int b)
+{
+    int nr=0,cif;
+    nod*p=extrageNod(p);
+   int putereB=1;
+    while(p!=NULL)
+    {cif=p->info;
+        nr+=cif*putereB;
+        putereB=putereB*10;
+        p=extrageNod(p);
+    }
+
+    int v[10],nr2=0;
+    while(nr!=0)
+    {
+        v[++nr2]=nr%b;
+        nr/=b;
+    }
+    for(int i=nr2; i>=1; i--)
+        adaugaNod(v[i]);
+    baza=b;
 
 }
 int main()
