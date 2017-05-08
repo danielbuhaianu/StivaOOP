@@ -15,7 +15,6 @@ class Stiva
 {
     private:
         nod*prim;
-
     public:
         int baza;
         Stiva()
@@ -30,6 +29,7 @@ class Stiva
         nod* extrageNod(nod*&p);
         void adaugaNod(int info);
         void conversieBaza10();
+        void conversieBazaB(int );
         Stiva operator+(Stiva&a);
         Stiva operator-(Stiva&a);
         Stiva operator*(int cifra);
@@ -86,10 +86,16 @@ void Stiva::adaugaNod(int info)
 }
 void Stiva::creareStiva()
 {
-    int cif;
+    int cif=0;
     fin>>baza;
-    while(fin>>cif)
+    do
+    {
+        fin>>cif;
+        if(cif>=0)
         adaugaNod(cif);
+    }
+    while(cif>=0);
+
 }
 void Stiva::afisareStiva()
 {
@@ -137,12 +143,23 @@ void Stiva::conversieBaza10()
         adaugaNod(v[i]);
     baza=10;
 }
+Stiva Stiva::operator+(Stiva&b)
+{
+    int baza_calcul = b.baza;
+    conversieBaza10();
+    b.conversieBaza10();
+
+}
 int main()
 {
-    Stiva a;
+    Stiva a,b,c;
     nod*p;
     a.creareStiva();
-    a.afisareStiva();
+    b.creareStiva();
     a.conversieBaza10();
+    b.conversieBaza10();
+    a.afisareStiva();
+    b.afisareStiva();
+
     return 0;
 }
