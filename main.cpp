@@ -244,7 +244,39 @@ Stiva Stiva::operator+(Stiva&b)
         c.adaugaNod(v[i]);
 
     c.conversieBazaB(baza_calcul);
+    conversieBazaB(baza_calcul);
+    b.conversieBazaB(baza_calcul);
     return c;
+}
+bool Stiva::operator>(Stiva&b)
+{
+    int nrcifreA=0,nrcifreB=0,v1[51],v2[51];
+    nod*startA=prim;
+    nod*startB=b.prim;
+
+    for(nod*p=startA;p!=NULL;p=p->urm)
+    {
+            v1[++nrcifreA]=p->info;
+    }
+    for(nod*p=startB;p!=NULL;p=p->urm)
+    {
+            v2[++nrcifreB]=p->info;
+    }
+    if(nrcifreA>nrcifreB)
+        return true;
+    if(nrcifreB>nrcifreA)
+        return false;
+
+    int i=nrcifreA;
+    while(v1[i]==v2[i]&&i>=1)
+        i--;
+    if(i==0)
+        return false;
+    else
+        if(v1[i]>v2[i])
+        return true;
+    else
+        return false;
 }
 
 int main()
@@ -257,5 +289,9 @@ int main()
     b.afisareStiva();
     c=a+b;
     c.afisareStiva();
+    if(a>b)
+        fout<<"A este mai mare ca B\n";
+    else
+        fout<<"B este mai mare sau egal ca A\n";
     return 0;
 }
