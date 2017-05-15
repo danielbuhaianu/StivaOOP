@@ -248,6 +248,63 @@ Stiva Stiva::operator+(Stiva&b)
     b.conversieBazaB(baza_calcul);
     return c;
 }
+
+Stiva Stiva::operator-(Stiva&b)
+{
+    int Baza_Stiva=b.baza,x,c1,c2,t=0,v[51],nr=0;
+    Stiva c;
+    conversieBaza10();
+    b.conversieBaza10();
+    nod*p1,*p2;
+    p1=prim;
+    p2=b.prim;
+    while(p1!=NULL && p2!=NULL)
+    {
+
+        c1=p1->info;
+        c2=p2->info;
+        x=c1-c2-t;
+
+         if(x>=0)
+        {
+            v[++nr]=x;
+             t=0;
+        }
+        else
+        {
+            v[++nr]=x+10;
+            t=1;
+        }
+        p1=p1->urm;
+        p2=p2->urm;
+
+    }
+    while(p1!=NULL)
+    {
+        c1=p1->info;
+        x=c1-t;
+        if(x>=0)
+        {
+            v[++nr]=x;
+            t=0;
+        }
+        else{
+             v[++nr]=x+10;
+                t=1;        }
+
+                p1=p1->urm;
+    }
+    int i=nr;
+     while(v[i]==0)
+        i--;
+     for(int j=i;j>=1;j--)
+        c.adaugaNod(v[j]);
+
+    c.conversieBazaB(Baza_Stiva);
+    conversieBazaB(Baza_Stiva);
+    b.conversieBazaB(Baza_Stiva);
+    return c;
+}
 bool Stiva::operator>(Stiva&b)
 {
     int nrcifreA=0,nrcifreB=0,v1[51],v2[51];
