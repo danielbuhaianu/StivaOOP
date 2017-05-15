@@ -335,7 +335,42 @@ bool Stiva::operator>(Stiva&b)
     else
         return false;
 }
+Stiva Stiva::operator*(int cifra)
+{
+    int Baza_Stiva=baza,c1,t=0,v[1001],x,nr=0;
+    Stiva c;
+    if(Baza_Stiva!=10)
+    conversieBaza10();
+    nod*p1;
+    p1=prim;
+    while(p1!=NULL)
+    {
+        c1=p1->info;
+        x=c1*cifra+t;
 
+        if(x<10)
+        {
+            v[++nr]=x;
+            t=0;
+        }
+        else
+        {
+            v[++nr]=x%10;
+            t=x/10;
+        }
+        p1=p1->urm;
+    }
+    if(t>0)
+        v[++nr]=t;
+
+    for(int i=nr; i>=1; i--)
+        c.adaugaNod(v[i]);
+      if(Baza_Stiva!=10)
+   {conversieBazaB(Baza_Stiva);
+    c.conversieBazaB(Baza_Stiva);}
+    return c;
+
+}
 int main()
 {
     Stiva a,b,c;
